@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
+from users import *
+from book import *
+from goods import *
+from operate import *
 # Create your views here.
 
 

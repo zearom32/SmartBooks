@@ -5,3 +5,4 @@ from books.models import *
 
 
 admin.site.register(JTest)
+admin.site.register(UserInfo)

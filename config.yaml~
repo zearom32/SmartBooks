@@ -1,0 +1,5 @@
+name: whynotwhy
+version: 3
+libraries:
+- name: django
+  version: "1.7"
