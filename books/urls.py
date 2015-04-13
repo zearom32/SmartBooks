@@ -15,4 +15,7 @@ urlpatterns = patterns('',
         url(r'^buy$',views.buy,name="buy"),
         url(r'^sell$',views.sell,name="sell"),
         url(r'^sellerinfo$',views.sellerinfo,name='sellerinfo'),
+
+##develop
+        #url(r'^deleteallusers$',views.deleteallusers, name = 'deleteallusers'),
         )

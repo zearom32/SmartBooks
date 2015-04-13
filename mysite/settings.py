@@ -33,6 +33,8 @@ ALLOWED_HOSTS = [
 
 from os import environ
 debug = not environ.get("APP_NAME","")
+sync = False
+
 if not debug:
     import sae.const
     db_name = sae.const.MYSQL_DB
@@ -41,13 +43,6 @@ if not debug:
     host = sae.const.MYSQL_HOST
     port = sae.const.MYSQL_PORT
     host_s = sae.const.MYSQL_HOST_S
-    #host = 'w.rdc.sae.sina.com.cn'
-    #port = '3307'
-    #name = 'yx4kmjk3jk'
-    #pwd = 'kz2xkmklkikyhz3hm2hlxi0iix0kz3j53y440013'
-    #db_name = 'app_whynotwhy'
-    #from sae._restful_mysql import monkey
-    #monkey.patch()
 
 else:
     db_name = "books"
@@ -56,6 +51,14 @@ else:
     host = "127.0.0.1"
     port = "3306"
 
+if sync and debug:
+    host = 'w.rdc.sae.sina.com.cn'
+    port = '3307'
+    name = '1o3l1w10on'
+    pwd = 'mxw1h1i4y5k225xmixiz5ylixm35lj1j212k1l45'
+    db_name = 'app_whynothappy'
+    from sae._restful_mysql import monkey
+    monkey.patch()
 
 DATABASES = {
     'default': {

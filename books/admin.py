@@ -6,3 +6,6 @@ from books.models import *
 
 admin.site.register(JTest)
 admin.site.register(UserInfo)
+admin.site.register(BookInfo)
+admin.site.register(GoodsInfo)
+
