@@ -35,19 +35,3 @@ def homepage(request):
     return JsonReturn(json.dumps(ans))
 
 
-
-###############################################
-##private function#############################
-##############
-
-
-def add_a_book(isbn):
-    if not BookInfo.objects.filter(isbn=isbn):
-        b = BookInfo(isbn = isbn)
-        b.save()
-    return JsonReturn(json.dumps(state(0)))
-
-
-
-def crawl_data(request):
-    pass

@@ -1,3 +1,4 @@
+#-*- coding:utf-8 -*-
 from django.shortcuts import render, render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext, loader
@@ -9,7 +10,8 @@ from datetime import *
 import re
 import random
 import json
-
+import xml
+import urllib
 
 def state(n):
     return {"state":n}
@@ -27,3 +29,18 @@ def check_request(fn):
 
 def JsonReturn(a):
     return HttpResponse(a,content_type = "application/json")
+
+
+def add_a_book(isbn):
+    if not BookInfo.objects.filter(isbn=isbn):
+        b = BookInfo(isbn = isbn)
+        b.save()
+    return JsonReturn(json.dumps(state(0)))
+
+##crawl douban api
+def update_data_using_douban_api(book):
+    if not book.has_data:
+        data = urllib.urlopen("http://api.douban.com/book/subject/isbn/"+book.isbn).read()
+
+##to be continued
+

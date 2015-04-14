@@ -4,6 +4,7 @@ from users import *
 from book import *
 from goods import *
 from operate import *
+from dev import *
 # Create your views here.
 
 

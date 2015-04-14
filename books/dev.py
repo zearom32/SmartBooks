@@ -11,6 +11,12 @@ import re
 import random
 import json
 
+def addbooks(request):
+    print request.body
+    body = json.loads(request.body)
+    isbn = body.get('isbn')
+    print isbn
+    for item in isbn:
+        add_a_book(item)
 
-def deleteallusers(request):
-    pass
+    return JsonReturn(json.dumps(state(0)))
