@@ -16,10 +16,11 @@ class BookInfo(models.Model):
     title = models.CharField(max_length = 100,null=True,blank=True)
     pages = models.IntegerField(default = 0)
     author = models.CharField(max_length = 100,null=True,blank=True)
-    price = models.DecimalField(max_digits=10,decimal_places =2,default = 0)
+    price = models.CharField(max_length = 20)
     publisher=models.CharField(max_length=100,null=True,blank=True)
-    publidate = models.CharField(max_length=20,null=True,blank=True)
+    pubdate = models.CharField(max_length=20,null=True,blank=True)
     has_data = models.BooleanField(default = False)
+    doubanid= models.CharField(max_length = 20, null = True,blank=True)
 
 class GoodsInfo(models.Model):
     seller = models.ForeignKey(User)

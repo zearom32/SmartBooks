@@ -10,7 +10,7 @@ from myutils import *
 import re
 import random
 import json
-
+import time
 def addbooks(request):
     print request.body
     body = json.loads(request.body)
@@ -19,4 +19,16 @@ def addbooks(request):
     for item in isbn:
         add_a_book(item)
 
+    return JsonReturn(json.dumps(state(0)))
+
+
+def updatebooks(request):
+    body = json.loads(request.body)
+    if body['username'] == "zearom32":
+        all_books = BookInfo.objects.filter(has_data=False)
+        if body.has_key('all'):
+            all_books = BookInfo.objects.all()
+        for book in all_books:
+            update_data_using_douban_api(book)
+            time.sleep(8)
     return JsonReturn(json.dumps(state(0)))

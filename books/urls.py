@@ -19,4 +19,5 @@ urlpatterns = patterns('',
 ##develop
         #url(r'^deleteallusers$',views.deleteallusers, name = 'deleteallusers'),
         url(r'^addbooks$',views.addbooks,name='addbooks'),
+        url(r'^updatebooks$',views.updatebooks,name="updatebooks"),
         )
