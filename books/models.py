@@ -27,6 +27,10 @@ class GoodsInfo(models.Model):
     description = models.CharField(max_length = 500, null = True, blank = True)
     sell_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now=True) 
+    numbers = models.IntegerField(default = 1)
+    source = models.URLField(max_length = 100, null = True, blank = True)
+    #1 means on sell. 2 means sold.
+    goods_state = models.IntegerField(default = 1)
 
 #log some important system informaiton
 #class SystemInfo(models.Model):

@@ -4,6 +4,7 @@ from django.template import RequestContext, loader
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.core import serializers
+from django.forms.models import model_to_dict
 from books.models import *
 from datetime import *
 import re
@@ -13,16 +14,15 @@ from myutils import *
 
 def books_of_a_seller(request):
     body = json.loads(request.body)
-    seller = User.objects.filter(username = body['seller'])
-    if not seller:
-        return JsonReturn(json.dumps(state(0)))
-    books =  seller.goods.all()
-    if not books:
+    seller = body.get('seller')
+    goods = GoodsInfo.objects.filter(seller__username = seller)
+    if not goods:
         return JsonReturn(json.dumps(state(0)))
     ans = dict()
     ans['state'] = 0
     book = []
-    for b in books:
+    for g in goods:
+        b = g.book
         w = dict()
         w['isbn'] = b.isbn
         book.append(w)
@@ -32,28 +32,40 @@ def books_of_a_seller(request):
         
 
 def goodsinfo(request):
-    pass
+    body = json.loads(request.body)
+    isbn = body.get('isbn')
+    username = body.get('username')
+    if not isbn or not username:
+        return JsonReturn(json.dumps(state(0)))
+    goods = GoodsInfo.objects.filter(seller__usrname = username, book__isbn = isbn)
+    if not goods:
+        return JsonReturn(json.dumps(state(0)))
+    goods = goods[0]
+    ans = model_to_dict(goods)
+    ans['state'] = 0
+    return JsonReturn(json.dumps(ans))
+    
+
 
 def sellers_of_a_book(request):
     body = json.loads(request.body)
     isbn = body.get('isbn')
-    if not isbn:
+    goods = GoodsInfo.objects.filter(book__isbn = isbn)
+    for g in GoodsInfo.objects.all():
+        print g.book.isbn
+    print goods
+    if not goods:
         return JsonReturn(json.dumps(state(0)))
-    book = BookInfo.objects.filter(isbn = isbn)
-    if not book:
-        return JsonReturn(json.dumps(state(0)))
-    users = books.goods.all()
-    if not users:
-        return JsonReturn(json.dumps(state(0)))
-    ans = []
+    ans = dict()
     ans['state'] = 0
     
     user = []
-    for u in users:
+    for k in goods:
+        u = k.seller
         m = dict()
         m['seller'] = u.username
         user.append(m)
-    ans['sellers'] = m
+    ans['sellers'] = user
     return JsonReturn(json.dumps(ans))
 
 
