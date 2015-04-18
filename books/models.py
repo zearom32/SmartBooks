@@ -23,6 +23,8 @@ class GoodsInfo(models.Model):
     seller = models.ForeignKey(User,related_name="goods")
     book = models.ForeignKey(BookInfo,related_name = "goods")
     price = models.DecimalField(max_digits=10,decimal_places=2)
+    quality = models.IntegerField(default = 100)
+    description = models.CharField(max_length = 500, null = True, blank = True)
     sell_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now=True) 
 
