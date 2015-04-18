@@ -10,6 +10,7 @@ from myutils import *
 import re
 import random
 import json
+import urllib
 
 def buy(request):
     pass
@@ -23,3 +24,8 @@ def sell(request):
     ans = dict()
     ans['state'] = 0
     return HttpResponse(json.dumps(ans),content_type="application/json")
+
+
+def douban_request_test(request):
+    page = urllib.urlopen("http://book.douban.com/subject/26299926/").read()
+    return HttpResponse(page,content_type = "text")

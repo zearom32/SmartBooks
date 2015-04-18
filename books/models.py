@@ -3,9 +3,6 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 
-class JTest(models.Model):
-    jtest = models.CharField(max_length = 100)
-    jtest2 = models.CharField(max_length = 100)
 
 class UserInfo(models.Model):
     user = models.OneToOneField(User,primary_key=True)
@@ -23,9 +20,11 @@ class BookInfo(models.Model):
     doubanid= models.CharField(max_length = 20, null = True,blank=True)
 
 class GoodsInfo(models.Model):
-    seller = models.ForeignKey(User)
-    book = models.ForeignKey(BookInfo)
+    seller = models.ForeignKey(User,related_name="goods")
+    book = models.ForeignKey(BookInfo,related_name = "goods")
     price = models.DecimalField(max_digits=10,decimal_places=2)
+    sell_time = models.DateTimeField(auto_now_add=True)
+    update_time = models.DateTimeField(auto_now=True) 
 
 #log some important system informaiton
 #class SystemInfo(models.Model):

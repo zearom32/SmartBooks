@@ -20,4 +20,5 @@ urlpatterns = patterns('',
         #url(r'^deleteallusers$',views.deleteallusers, name = 'deleteallusers'),
         url(r'^addbooks$',views.addbooks,name='addbooks'),
         url(r'^updatebooks$',views.updatebooks,name="updatebooks"),
+        url(r'^douban_request_test',views.douban_request_test,name="douban_request_test"),
         )
