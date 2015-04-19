@@ -19,6 +19,9 @@ class BookInfo(models.Model):
     has_data = models.BooleanField(default = False)
     doubanid= models.CharField(max_length = 20, null = True,blank=True)
 
+    def __unicode__(self):
+        return self.title
+
 class GoodsInfo(models.Model):
     seller = models.ForeignKey(User,related_name="goods")
     book = models.ForeignKey(BookInfo,related_name = "goods")
